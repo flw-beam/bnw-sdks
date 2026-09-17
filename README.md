@@ -3,11 +3,10 @@
 Public release repository for Flutterwave Beam client SDKs and shared public
 libraries.
 
-This repository contains release snapshots that external and internal producer
-teams can install without access to the private product repositories where the
-SDKs are developed. Source development, private conformance fixtures, service
-code, deployment configuration, and private repository history stay in the
-owning product repository.
+SDKs are developed in their owning private product repositories. The `main`
+branch of this repository contains documentation only. Existing public tags
+record historical SDK snapshots; they do not make this repository a second
+development codebase.
 
 ## Current packages
 
@@ -16,8 +15,8 @@ owning product repository.
 | Auditlog Go SDK | `auditlog-go/` | `auditlog-go/vX.Y.Z` | Go module |
 | Auditlog JavaScript SDK | `auditlog-js/` | `auditlog-js-vX.Y.Z` | GitHub Release tarball |
 
-The package directories appear after their first public release is exported.
-Until then, the install commands below are templates.
+The `auditlog-go/` and `auditlog-js/` directories are present in the existing
+`v0.1.2` tags, not on `main`. Future release publishing is being revised.
 
 ## Install the Auditlog Go SDK
 
@@ -41,7 +40,9 @@ auditlog-go/vX.Y.Z
 
 ## Install the Auditlog JavaScript SDK
 
-For npm consumers, install the release tarball attached to the GitHub Release:
+For npm consumers, a release tarball can be installed from a GitHub Release
+once that release and its asset have been published. There is currently no
+GitHub Release for the existing JavaScript tag, so this is a future template:
 
 ```sh
 npm install 'https://github.com/flw-beam/bnw-sdks/releases/download/auditlog-js-vX.Y.Z/auditlog-js-X.Y.Z.tgz'
@@ -94,28 +95,9 @@ reviewed source commit without exposing the private repository history.
 
 ## Maintainer workflow
 
-Do not develop SDK changes directly in this repository. Make SDK source changes
-in the owning private product repository, run the SDK tests there, and use that
-repository's release task to export a reviewed snapshot here.
-
-For the Audit Service SDKs, run from `audit-service-api`:
-
-```sh
-task sdk:release SDK=go VERSION=X.Y.Z
-task sdk:release SDK=js VERSION=X.Y.Z
-```
-
-The release task writes into this repository, validates the public package, and
-can optionally commit, tag, and push when called with the relevant flags:
-
-```sh
-task sdk:release SDK=go VERSION=X.Y.Z -- --commit
-task sdk:release SDK=go VERSION=X.Y.Z -- --tag
-task sdk:release SDK=go VERSION=X.Y.Z -- --push
-```
-
-For JavaScript releases, attach the generated `auditlog-js-X.Y.Z.tgz` file to
-the matching GitHub Release before announcing the version to consumers.
+Develop SDK changes in the owning private product repository. The earlier
+snapshot exporter has been reverted. A replacement release workflow has not
+been published yet; do not use the old release task to publish to this repo.
 
 Published tags and release assets are immutable. If a release is wrong, publish
 a new version instead of moving an existing tag.
