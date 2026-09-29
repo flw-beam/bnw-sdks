@@ -67,7 +67,7 @@ once that release and its asset have been published. There is currently no
 GitHub Release for the existing JavaScript tag, so this is a future template:
 
 ```sh
-npm install 'https://github.com/flw-beam/bnw-sdks/releases/download/auditlog-js-vX.Y.Z/flutterwavego-audit-service-sdk-X.Y.Z.tgz'
+npm install 'https://github.com/flw-beam/bnw-sdks/releases/download/auditlog-js-vX.Y.Z/auditlog-js-X.Y.Z.tgz'
 ```
 
 For pnpm consumers that want the tagged source package, install from the
@@ -92,9 +92,9 @@ It is installed from GitHub, not from the public npm registry.
 The Checkout packages share the `@flutterwavego` scope with the Auditlog
 JavaScript SDK and are installed from GitHub, not from the public npm registry.
 They are MIT licensed, and each tarball carries its `LICENSE`. Each public path
-is the package name without the scope, and each release asset keeps the file
-name `pnpm pack` gives it, so `@flutterwavego/checkout-sdk` ships as
-`flutterwavego-checkout-sdk-X.Y.Z.tgz` on the `checkout-sdk-vX.Y.Z` release.
+is the package name without the scope, and each release asset is named for its
+tag, so `@flutterwavego/checkout-sdk` ships as `checkout-sdk-X.Y.Z.tgz` on the
+`checkout-sdk-vX.Y.Z` release.
 
 A package that depends on other Checkout packages names each one by its
 release tarball URL, so every tarball installs on its own: the package manager
@@ -108,14 +108,14 @@ are future templates.
 Install each package you use by its release URL, pinned to an exact version:
 
 ```sh
-npm install 'https://github.com/flw-beam/bnw-sdks/releases/download/checkout-react-vX.Y.Z/flutterwavego-checkout-react-X.Y.Z.tgz'
+npm install 'https://github.com/flw-beam/bnw-sdks/releases/download/checkout-react-vX.Y.Z/checkout-react-X.Y.Z.tgz'
 ```
 
 The same URL works with `pnpm add` and `yarn add`. For the CLI, install it
 globally:
 
 ```sh
-npm install -g 'https://github.com/flw-beam/bnw-sdks/releases/download/checkout-cli-vX.Y.Z/flutterwavego-checkout-cli-X.Y.Z.tgz'
+npm install -g 'https://github.com/flw-beam/bnw-sdks/releases/download/checkout-cli-vX.Y.Z/checkout-cli-X.Y.Z.tgz'
 ```
 
 When an application installs more than one Checkout package, take them from
@@ -194,11 +194,11 @@ Two things are common to every product:
 - A tag is named for the package's public path and version, such as
   `checkout-sdk-vX.Y.Z` or `auditlog-js-vX.Y.Z`. Go module tags are the
   exception, scoped to the module directory as `auditlog-go/vX.Y.Z`.
-- A release asset keeps the file name its pack step gives it: the package name
-  with the `@` dropped and `/` as `-`, then the version, such as
-  `flutterwavego-checkout-sdk-X.Y.Z.tgz`. A Python wheel keeps its standard
-  name, which pip reads the package name and version from. Nothing is renamed
-  on upload.
+- A release asset is named for its tag without the `v`, such as
+  `checkout-sdk-X.Y.Z.tgz` on `checkout-sdk-vX.Y.Z` or `auditlog-js-X.Y.Z.tgz`
+  on `auditlog-js-vX.Y.Z`. Package managers read a package's name from inside
+  its tarball, never from the file name. A Python wheel is the exception: it
+  keeps its standard name, which pip reads the package name and version from.
 
 What a tag holds is each product's choice. Auditlog's tags hold the package
 source. Checkout's hold each package as released, with its `RELEASE.md`.
