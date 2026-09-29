@@ -37,8 +37,8 @@ development codebase.
 
 The `auditlog-go/` and `auditlog-js/` directories are present in the existing
 `v0.1.2` tags, not on `main`. No Checkout package has a public tag yet; its
-rows record the path and tag its first release will use. Future release
-publishing is being revised.
+rows record the path and tag its first release will use. Each product publishes
+its own releases; see [Maintainer workflow](#maintainer-workflow).
 
 ## Install the Auditlog Go SDK
 
@@ -67,7 +67,7 @@ once that release and its asset have been published. There is currently no
 GitHub Release for the existing JavaScript tag, so this is a future template:
 
 ```sh
-npm install 'https://github.com/flw-beam/bnw-sdks/releases/download/auditlog-js-vX.Y.Z/auditlog-js-X.Y.Z.tgz'
+npm install 'https://github.com/flw-beam/bnw-sdks/releases/download/auditlog-js-vX.Y.Z/flutterwavego-audit-service-sdk-X.Y.Z.tgz'
 ```
 
 For pnpm consumers that want the tagged source package, install from the
@@ -183,9 +183,25 @@ reviewed source commit without exposing the private repository history.
 
 ## Maintainer workflow
 
-Develop SDK changes in the owning private product repository. The earlier
-snapshot exporter has been reverted. A replacement release workflow has not
-been published yet; do not use the old release task to publish to this repo.
+Develop SDK changes in the owning private product repository. Each product's
+own CI publishes that product's releases here: one tag per package and version,
+and a GitHub Release on that tag with the package's asset attached. The earlier
+shared snapshot exporter has been reverted; do not use the old release task to
+publish to this repo.
+
+Two things are common to every product:
+
+- A tag is named for the package's public path and version, such as
+  `checkout-sdk-vX.Y.Z` or `auditlog-js-vX.Y.Z`. Go module tags are the
+  exception, scoped to the module directory as `auditlog-go/vX.Y.Z`.
+- A release asset keeps the file name its pack step gives it: the package name
+  with the `@` dropped and `/` as `-`, then the version, such as
+  `flutterwavego-checkout-sdk-X.Y.Z.tgz`. A Python wheel keeps its standard
+  name, which pip reads the package name and version from. Nothing is renamed
+  on upload.
+
+What a tag holds is each product's choice. Auditlog's tags hold the package
+source. Checkout's hold each package as released, with its `RELEASE.md`.
 
 An exported Checkout package must name each Checkout package it depends on by
 that package's release tarball URL, not by a version. The single-command
