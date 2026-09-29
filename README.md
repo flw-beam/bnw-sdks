@@ -91,10 +91,10 @@ It is installed from GitHub, not from the public npm registry.
 
 The Checkout packages share the `@flutterwavego` scope with the Auditlog
 JavaScript SDK and are installed from GitHub, not from the public npm registry.
-They are MIT licensed, and each tarball carries its `LICENSE`. Each public path is the package name without the scope, and each release asset
-keeps the file name `pnpm pack` gives it, so `@flutterwavego/checkout-sdk`
-ships as `flutterwavego-checkout-sdk-X.Y.Z.tgz` on the `checkout-sdk-vX.Y.Z`
-release.
+They are MIT licensed, and each tarball carries its `LICENSE`. Each public path
+is the package name without the scope, and each release asset keeps the file
+name `pnpm pack` gives it, so `@flutterwavego/checkout-sdk` ships as
+`flutterwavego-checkout-sdk-X.Y.Z.tgz` on the `checkout-sdk-vX.Y.Z` release.
 
 A package that depends on other Checkout packages names each one by its
 release tarball URL, so every tarball installs on its own: the package manager
@@ -138,8 +138,8 @@ flw-checkout @ https://github.com/flw-beam/bnw-sdks/releases/download/checkout-p
 
 The wheel keeps its standard file name because pip reads the package name and
 version from it. The distribution is `flw-checkout`, imported as
-`flw_checkout`, requires Python 3.9 or later, and is MIT licensed. It is installed from GitHub,
-not from PyPI.
+`flw_checkout`, requires Python 3.9 or later, and is MIT licensed. It is
+installed from GitHub, not from PyPI.
 
 ## Runtime configuration
 
